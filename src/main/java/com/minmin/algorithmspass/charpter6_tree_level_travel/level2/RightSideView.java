@@ -22,6 +22,7 @@ public class RightSideView {
     }
 
     public static List<Integer> rightSideViewByMyself(TreeNode root) {
+        // 队列其实就起到了一个缓存的作用，它保存了元素到达先后顺序的信息，同时提供一种受限的api去操作它们
         List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;

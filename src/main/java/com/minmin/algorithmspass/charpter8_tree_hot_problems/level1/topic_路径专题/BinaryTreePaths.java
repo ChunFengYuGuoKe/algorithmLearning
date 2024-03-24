@@ -23,6 +23,18 @@ public class BinaryTreePaths {
         return res;
     }
 
+    public void dfsByMyself(TreeNode root, String path, List<String> res) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            path = path + root.val;
+            res.add(path);
+            return;
+        }
+        // 为什么这里要写左右两个子树的递归，因为它的逻辑是没有返回到父节点的，所以要通过这种方式来覆盖所有节点
+        dfs(root.left, path + root.val + "->", res);
+        dfs(root.right, path + root.val + "->", res);
+    }
+
     private static void dfs(TreeNode root, String path, List<String> res) {
         //如果为空，直接返回
         if (root == null)

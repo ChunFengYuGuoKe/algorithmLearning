@@ -39,6 +39,14 @@ public class BasicTreeTravel {
      * @param res
      */
 
+    public static void preOrderByMyself(TreeNode root, List<Integer> res) {
+        if (root == null) return;
+        res.add(root.getVal());
+        preOrderByMyself(root.left, res);
+        preOrderByMyself(root.right, res);
+    }
+
+
     public static void preOrder(TreeNode root, List<Integer> res) {
         if (root == null) { return;}
         res.add(root.val);
@@ -52,6 +60,13 @@ public class BasicTreeTravel {
      * @param root
      * @param res
      */
+
+    public static void inOrderByMyself(TreeNode root, List<Integer> res) {
+        if (root == null) return;
+        inOrderByMyself(root.left, res);
+        res.add(root.getVal());
+        inOrderByMyself(root.right, res);
+    }
 
     public static void inOrder(TreeNode root, List<Integer> res) {
         if (root == null) { return;
@@ -67,6 +82,12 @@ public class BasicTreeTravel {
      * @param root
      * @param res
      */
+    public static void postOrderByMyself(TreeNode root, List<Integer> res) {
+        if (root == null) return;
+        postOrderByMyself(root.left, res);
+        postOrderByMyself(root.right, res);
+        res.add(root.getVal());
+    }
 
     public static void postOrder(TreeNode root, List<Integer> res) {
         if (root == null) {

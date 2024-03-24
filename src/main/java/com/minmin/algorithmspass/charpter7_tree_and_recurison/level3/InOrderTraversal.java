@@ -19,6 +19,40 @@ public class InOrderTraversal {
         System.out.println(inorderTraversal(bTree.root));
     }
 
+    public static List<Integer> inorderTraversalByMyself(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            res.add(node.getVal());
+            node = node.right;
+        }
+        return res;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<Integer>();
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
