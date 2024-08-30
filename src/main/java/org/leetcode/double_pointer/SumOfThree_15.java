@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SumOfThree_15 {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        List<List<Integer>> ans = new ArrayList<>();
         int n = nums.length;
         Arrays.sort(nums);
         for(int first = 0; first < n; first++) {
@@ -31,15 +31,89 @@ public class SumOfThree_15 {
                 }
                 if(second == third) break;
                 if(nums[second] + nums[third] == target) {
-                    List<Integer> res = new ArrayList<Integer>();
+                    List<Integer> res = new ArrayList<>();
                     res.add(nums[first]);
                     res.add(nums[second]);
                     res.add(nums[third]);
                     ans.add(res);
                 }
-
             }
         }
         return ans;
+    }
+
+    /**
+     * 错误版
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum1(int[] nums) {
+        Arrays.sort(nums);
+        int left = 0;
+        int right = nums.length - 1;
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.length - 2; i++) {
+            while (i > 0 && nums[i] == nums[i - 1]) {
+                i++;
+            }
+            left = i + 1;
+            right = nums.length - 1;
+            int sum = nums[i] + nums[left] + nums[right];
+            while (left < right) {
+                if (sum < 0) {
+                    left++;
+                    while (left > 0 && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
+                } else if (sum > 0) {
+                    while (nums[right] == nums[right + 1]) {
+                        right--;
+                    }
+                }else {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[left]);
+                    list.add(nums[right]);
+                    res.add(list);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 修正版
+     */
+    public List<List<Integer>> threeSum2(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                return res;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                if (nums[i] + nums[left] + nums[right] < 0) {
+                    left++;
+                } else if (nums[i] + nums[left] + nums[right] > 0) {
+                    right--;
+                } else {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[left]);
+                    list.add(nums[right]);
+                    res.add(list);
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    right--;
+                    left++;
+                }
+            }
+        }
+        return res;
     }
 }

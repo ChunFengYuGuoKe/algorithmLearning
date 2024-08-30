@@ -16,6 +16,26 @@ public class CommonAncestor {
 
     }
 
+    /**
+     * 后序遍历的本质特征是什么，从表象上看，就是先递归调用处理左右子树，最后完成本结点的处理
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public static TreeNode lowestCommonAncestorByMyself(TreeNode root, TreeNode p, TreeNode q) {
+        // 如果找到叶子节点还没找到，或者找到了需要找的节点，就终止递归，开始返回
+        if (root == null || root == p || root == q) return root;
+        // 在左右子树中搜索，搜到了left和right就为对应的节点
+        TreeNode left = lowestCommonAncestorByMyself(root.left, p, q);
+        TreeNode right = lowestCommonAncestorByMyself(root.right, p, q);
+        if (left == null && right == null) return null;
+        if (left == null) return right;
+        if (right == null) return left;
+        // 当搜到一个节点计算出的的left和right都不为null时，说明找到了最近祖先节点
+        return root;
+    }
+
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
         TreeNode left = lowestCommonAncestor(root.left, p, q);

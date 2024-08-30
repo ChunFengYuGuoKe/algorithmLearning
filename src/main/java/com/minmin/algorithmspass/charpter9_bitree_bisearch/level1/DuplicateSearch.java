@@ -23,6 +23,32 @@ public class DuplicateSearch {
 
     }
 
+    public static int search1ByMyself(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return -1;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] > target) {
+                right = mid - 1;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                // 如果mid元素一直等于目标值，就一直向前找，直到不为目标值
+                while (mid != 0 && nums[mid] == target) {
+                    mid --;
+                }
+                // 当循环是因为mid到0位置时，mid不用+1
+                if (mid == 0 && nums[mid] == target) {
+                    return mid;
+                }
+                // 当循环是因为nums[mid] != target停下时，mid需要+1，因为上一个元素才是target
+                return mid + 1;
+            }
+        }
+        return -1;
+    }
+
     public static int search1(int[] nums, int target) {
         if (nums == null || nums.length == 0)
             return -1;

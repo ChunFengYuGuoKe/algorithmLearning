@@ -22,6 +22,7 @@ public class IsBalance {
 
     }
 
+
     /**
      * 方法1 自下而上
      *
@@ -30,6 +31,17 @@ public class IsBalance {
      */
     public static boolean isBalanced_1(TreeNode root) {
         return recur(root) != -1;
+    }
+
+    public static int height(TreeNode root) {
+        if (root == null) return 0;
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
     }
 
     public static int recur(TreeNode root) {

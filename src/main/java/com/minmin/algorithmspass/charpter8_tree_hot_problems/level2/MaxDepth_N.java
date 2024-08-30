@@ -5,6 +5,7 @@ package com.minmin.algorithmspass.charpter8_tree_hot_problems.level2;
 import com.minmin.algorithmspass.tools.NTree;
 import com.minmin.algorithmspass.tools.NTreeNode;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +24,21 @@ public class MaxDepth_N {
         System.out.println(result);
 
     }
+
+    public static int maxDepth_NByMyself(NTreeNode root) {
+        if (root == null) {
+            return 0;
+        } else if (root.children.isEmpty()) {
+            return 1;
+        } else {
+            List<Integer> heights = new ArrayList<>();
+            for (NTreeNode child : root.children) {
+                heights.add(maxDepth_NByMyself(child));
+            }
+            return Collections.max(heights);
+        }
+    }
+
 
     public static int maxDepth_N(NTreeNode root) {
         if (root == null) {
